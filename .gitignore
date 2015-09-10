@@ -1,0 +1,17 @@
+#Workspace
+.metadata
+appcompat_v7
+Servers
+
+#Appspiration
+.settings
+bin
+gen
+.classpath
+.project
+proguard-project
+project.properties
+
+#appspiration_webservice
+build
+Constants.java

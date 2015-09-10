@@ -1,0 +1,18 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.jimmy.appspiration.MainActivity" >
+
+    <item
+        android:id="@+id/action_search"
+        android:icon="@drawable/ic_search_white_24dp"
+        android:showAsAction="ifRoom"
+        android:title="@string/action_search"/>
+    
+    <item
+        android:id="@+id/action_create"
+        android:icon="@drawable/ic_create_white_24dp"
+        android:showAsAction="ifRoom"
+        android:title="@string/action_create"/>
+
+</menu>
