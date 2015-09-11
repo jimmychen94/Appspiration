@@ -1,5 +1,7 @@
 package com.jimmy.appspiration;
 
+import com.jimmy.view.SlidingTabLayout;
+
 import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
@@ -25,22 +27,28 @@ import android.widget.TextView;
  * 
  * Home Screen Activity
  */
-public class FragmentPagerSupport extends FragmentActivity {
-    static final int NUM_ITEMS = 3;
-
+public class ThreadPagerActivity extends FragmentActivity {
+	
+    static final int NUM_ITEMS = 4;
     MyAdapter mAdapter;
-
     ViewPager mPager;
+    SlidingTabLayout tabs;
+    CharSequence Titles[]={"Categories","Today", "Newest", "Weekly Top"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.fragment_pager);
+        setContentView(R.layout.thread_pager);
 
-        mAdapter = new MyAdapter(this, getSupportFragmentManager());
+        mAdapter = new MyAdapter(this, getSupportFragmentManager(), Titles);
 
         mPager = (ViewPager)findViewById(R.id.pager);
         mPager.setAdapter(mAdapter);
+        
+        tabs = (SlidingTabLayout) findViewById(R.id.sliding_tab_layout);
+        tabs.setDistributeEvenly(false);
+        tabs.setViewPager(mPager);
+        mPager.setCurrentItem(1);
 
     }
     
@@ -66,19 +74,21 @@ public class FragmentPagerSupport extends FragmentActivity {
                 return super.onOptionsItemSelected(item);
         }
     }
-
-    public static class MyAdapter extends FragmentPagerAdapter {
+    
+    public class MyAdapter extends FragmentPagerAdapter {
     	
+    	CharSequence Titles[];
     	Context context = null;
     	
-        public MyAdapter(Context context, FragmentManager fm) {
+        public MyAdapter(Context context, FragmentManager fm, CharSequence mTitles[]) {
             super(fm);
             this.context=context;
+            this.Titles = mTitles;
         }
 
         @Override
         public int getCount() {
-            return NUM_ITEMS;
+            return ThreadPagerActivity.NUM_ITEMS;
         }
 
         @Override
@@ -86,8 +96,8 @@ public class FragmentPagerSupport extends FragmentActivity {
             return ArrayListFragment.newInstance(position);
         }
         
-        public String getPageTitle(int position) {
-        	return ArrayListFragment.getTitle(context, position);
+        public CharSequence getPageTitle(int position) {
+        	return Titles[position];
         }
     }
 
@@ -128,9 +138,7 @@ public class FragmentPagerSupport extends FragmentActivity {
          */
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-            View v = inflater.inflate(R.layout.fragment_pager_list, container, false);
-            View tv = v.findViewById(R.id.text);
-            ((TextView)tv).setText("Fragment #" + mNum);
+            View v = inflater.inflate(R.layout.thread_list, container, false);
             return v;
         }
 

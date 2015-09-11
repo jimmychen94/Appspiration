@@ -100,7 +100,7 @@ public class LoginActivity extends Activity {
 	}
 
 	public void navigatetoHomeActivity(){
-		Intent homeIntent = new Intent(getApplicationContext(),FragmentPagerSupport.class);
+		Intent homeIntent = new Intent(getApplicationContext(),ThreadPagerActivity.class);
 		homeIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 		startActivity(homeIntent);
 	}
